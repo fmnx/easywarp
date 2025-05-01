@@ -134,10 +134,10 @@ func (w *Warp) Run() {
 
 func resolvEndpoint(endpoint string) string {
 	c, err := net.DialTimeout("udp", endpoint, 3*time.Second)
-	defer c.Close()
 	if err != nil {
 		return "162.159.192.1:2408"
 	} else {
+		_ = c.Close()
 	}
 	return c.RemoteAddr().String()
 }
